@@ -16,13 +16,6 @@ def click_cell(button):
         button.configure(fg_color="orange")
 
 
-    # clicked = False
-    # clicked = True
-
-# preset_button = customtkinter.CTkButton(root, text="Presets", command=record_button, height=PRESET_HEIGHT, width=PRESET_WIDTH)
-# preset_button.grid(row=0, column=0, padx=20, pady=20)
-
-
 button_frame = customtkinter.CTkFrame(root)
 button_frame.grid(row=1, column=0, padx=5, pady=10)
 
@@ -42,7 +35,7 @@ shift_button = customtkinter.CTkButton(button_frame, text="SHIFT", height=BUTTON
 group_button = customtkinter.CTkButton(button_frame, text="GROUP", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
 pattern_button = customtkinter.CTkButton(button_frame, text="PATTERN", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
 rec_button = customtkinter.CTkButton(root, text="REC", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey") 
-
+presets_button = customtkinter.CTkButton(root, text="Presets", height=50, width=200, fg_color="grey", hover_color="darkgrey")
 
 
 
@@ -110,6 +103,7 @@ shift_button.grid(row=1, column=0, padx=20, pady=10)
 group_button.grid(row=2, column=0, padx=20, pady=10)
 pattern_button.grid(row=3, column=0, padx=20, pady=10)
 rec_button.grid(row=2, column=0, padx=10, pady=40)
+presets_button.grid(row=0, column=1)
 
 cell_1.grid(row=5, column=1, pady=5, padx=5.5)
 cell_2.grid(row=5, column=2, pady=5, padx=5.5)
