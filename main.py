@@ -1,5 +1,6 @@
 import customtkinter
 from constants import *
+import time
 
 root = customtkinter.CTk()
 
@@ -7,7 +8,9 @@ root.geometry("1205x600")
 root.title("Drum Machine")
 
 def record_button():
-    print("record mode is on!")
+    pass
+    # loop_cells()
+    # print("record mode is on!")
 
 def click_cell(button):
     if button._fg_color == "orange": 
@@ -34,7 +37,7 @@ bpm_button = customtkinter.CTkButton(root, text="BPM", height=BUTTON_HEIGHT, wid
 shift_button = customtkinter.CTkButton(button_frame, text="SHIFT", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
 group_button = customtkinter.CTkButton(button_frame, text="GROUP", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
 pattern_button = customtkinter.CTkButton(button_frame, text="PATTERN", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
-rec_button = customtkinter.CTkButton(root, text="REC", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey") 
+rec_button = customtkinter.CTkButton(root, text="REC", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
 presets_button = customtkinter.CTkButton(root, text="Presets", height=50, width=200, fg_color="grey", hover_color="darkgrey")
 
 
@@ -61,7 +64,21 @@ cell_15 = customtkinter.CTkButton(cell_frame, text="", height=55, width=55, comm
 cell_16 = customtkinter.CTkButton(cell_frame, text="", height=55, width=55, command=lambda: click_cell(cell_16), hover=None, fg_color="grey")
 
 
-
+def loop_cells():
+    pass
+    # cell_1.configure(fg_color="orange")
+    # time.sleep(0.3)
+    # cell_1.configure(fg_color="grey")
+    # i = 0
+    # count = 0
+    # button_list = [cell_1, cell_2, cell_3, cell_4]
+    # while True:
+        # i += 1
+        # if i == 3:
+        #     i = 0
+        # count += 1
+        # if count == 4:
+        #     break
 
 slider_1 = customtkinter.CTkSlider(slider_frame, height=300, from_=0, to=100, orientation="vertical")
 slider_2 = customtkinter.CTkSlider(slider_frame, height=300, from_=0, to=100, orientation="vertical")
@@ -123,7 +140,9 @@ cell_15.grid(row=5, column=15, pady=5, padx=5.5)
 cell_16.grid(row=5, column=16, pady=5, padx=5.5)
 
 
-# root.grid_columnconfigure(0, weight=1)
+        
+
+
 
 
 root.mainloop()
