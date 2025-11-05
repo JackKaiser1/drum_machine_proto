@@ -12,16 +12,10 @@ root = customtkinter.CTk()
 root.geometry("1205x800")
 root.title("Drum Machine")
 
+drum_sound = drum(kick)
 
 def pause_btn():
-    for cell in cell_list:
-        if int(cell._text) in drum_sound.drum_obj.beat_list:
-            # if int(cell._text) == beat:
-            print(int(cell._text))
-            print(cell)
-            cell.configure(fg_color="orange")
-        elif cell._fg_color == "orange":
-            cell.configure(fg_color="grey")
+    pass
 
 def record_button():
     play()
@@ -29,13 +23,12 @@ def record_button():
 
 def click_cell(button, drum):
     beat = int(button._text)
-  
-                
-            
-
-    if button._fg_color == "grey": 
+    if button._fg_color == "grey" or button._fg_color == "darkgrey": 
         drum.beat_list.append(beat)
         button.configure(fg_color="orange")
+    elif beat in [5,6,7,8,13,14,15,16]:
+        drum.beat_list.remove(beat)
+        button.configure(fg_color="darkgrey")
     else:
         drum.beat_list.remove(beat)
         button.configure(fg_color="grey")
@@ -55,7 +48,7 @@ root.grid_rowconfigure(0, weight=0)
 
 # drum_obj = None
 
-drum_sound = drum(kick)
+
 
 
 def drum_select(drum):
@@ -68,13 +61,17 @@ def drum_select(drum):
     elif drum == "rim":
         drum_sound.drum_obj = rim
     
-    
+    for cell in cell_list:
+        cell_num = int(cell._text)
+        beat_list = drum_sound.drum_obj.beat_list
+        if cell_num in beat_list:
+            cell.configure(fg_color="orange")
+        elif cell._fg_color == "orange":
+            if cell_num in [5,6,7,8,13,14,15,16]:
+                cell.configure(fg_color="darkgrey")
+            else:
+                cell.configure(fg_color="grey")
 
-
-   
-
-    # print(drum_obj)
-    # return drum_obj
 
 
 
@@ -101,20 +98,20 @@ cell_2 = customtkinter.CTkButton(cell_frame, text="2", height=55, width=55, comm
 cell_3 = customtkinter.CTkButton(cell_frame, text="3", height=55, width=55, command=lambda: click_cell(cell_3, drum_sound.drum_obj), hover=None, fg_color="grey")
 cell_4 = customtkinter.CTkButton(cell_frame, text="4", height=55, width=55, command=lambda: click_cell(cell_4, drum_sound.drum_obj), hover=None, fg_color="grey")
 
-cell_5 = customtkinter.CTkButton(cell_frame, text="5", height=55, width=55, command=lambda: click_cell(cell_5, drum_sound.drum_obj), hover=None, fg_color="grey")
-cell_6 = customtkinter.CTkButton(cell_frame, text="6", height=55, width=55, command=lambda: click_cell(cell_6, drum_sound.drum_obj), hover=None, fg_color="grey")
-cell_7 = customtkinter.CTkButton(cell_frame, text="7", height=55, width=55, command=lambda: click_cell(cell_7, drum_sound.drum_obj), hover=None, fg_color="grey")
-cell_8 = customtkinter.CTkButton(cell_frame, text="8", height=55, width=55, command=lambda: click_cell(cell_8, drum_sound.drum_obj), hover=None, fg_color="grey")
+cell_5 = customtkinter.CTkButton(cell_frame, text="5", height=55, width=55, command=lambda: click_cell(cell_5, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
+cell_6 = customtkinter.CTkButton(cell_frame, text="6", height=55, width=55, command=lambda: click_cell(cell_6, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
+cell_7 = customtkinter.CTkButton(cell_frame, text="7", height=55, width=55, command=lambda: click_cell(cell_7, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
+cell_8 = customtkinter.CTkButton(cell_frame, text="8", height=55, width=55, command=lambda: click_cell(cell_8, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
 
 cell_9 = customtkinter.CTkButton(cell_frame, text="9", height=55, width=55, command=lambda: click_cell(cell_9, drum_sound.drum_obj), hover=None, fg_color="grey")
 cell_10 = customtkinter.CTkButton(cell_frame, text="10", height=55, width=55, command=lambda: click_cell(cell_10, drum_sound.drum_obj), hover=None, fg_color="grey")
 cell_11 = customtkinter.CTkButton(cell_frame, text="11", height=55, width=55, command=lambda: click_cell(cell_11, drum_sound.drum_obj), hover=None, fg_color="grey")
 cell_12 = customtkinter.CTkButton(cell_frame, text="12", height=55, width=55, command=lambda: click_cell(cell_12, drum_sound.drum_obj), hover=None, fg_color="grey")
 
-cell_13 = customtkinter.CTkButton(cell_frame, text="13", height=55, width=55, command=lambda: click_cell(cell_13, drum_sound.drum_obj), hover=None, fg_color="grey")
-cell_14 = customtkinter.CTkButton(cell_frame, text="14", height=55, width=55, command=lambda: click_cell(cell_14, drum_sound.drum_obj), hover=None, fg_color="grey")
-cell_15 = customtkinter.CTkButton(cell_frame, text="15", height=55, width=55, command=lambda: click_cell(cell_15, drum_sound.drum_obj), hover=None, fg_color="grey")
-cell_16 = customtkinter.CTkButton(cell_frame, text="16", height=55, width=55, command=lambda: click_cell(cell_16, drum_sound.drum_obj), hover=None, fg_color="grey")
+cell_13 = customtkinter.CTkButton(cell_frame, text="13", height=55, width=55, command=lambda: click_cell(cell_13, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
+cell_14 = customtkinter.CTkButton(cell_frame, text="14", height=55, width=55, command=lambda: click_cell(cell_14, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
+cell_15 = customtkinter.CTkButton(cell_frame, text="15", height=55, width=55, command=lambda: click_cell(cell_15, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
+cell_16 = customtkinter.CTkButton(cell_frame, text="16", height=55, width=55, command=lambda: click_cell(cell_16, drum_sound.drum_obj), hover=None, fg_color="darkgrey")
 
 cell_list = [cell_1, cell_2, cell_3, cell_4, cell_5, cell_6, cell_7, cell_8, cell_9, cell_10, cell_11, cell_12, cell_13, cell_14, cell_15, cell_16]
 
