@@ -2,24 +2,28 @@ import pygame
 from pygame import mixer 
 import customtkinter
 import time
+from sound_class import sample
 
-root = customtkinter.CTk()
+# root = customtkinter.CTk()
 
-root.geometry("500x500")
-root.title("Sound Test")
+# root.geometry("500x500")
+# root.title("Sound Test")
 
+# kick_button = customtkinter.CTkButton(root, text="KICK", height=80, width=80, command=play_kick)
+# kick_button.grid(row=0, column=0)
+
+# clap_button = customtkinter.CTkButton(root, text="CLAP", height=80, width=80, command=play_clap)
+# clap_button.grid(row=0, column=1)
 
 pygame.mixer.init(channels=1)
-# pygame.mixer.init()
-
-# mixer.music.load("drum_kit/Clap.wav")
-# mixer.music.load("drum_kit/Kick Basic.wav")
 pygame.mixer.music.set_volume(0.8)
-clap = pygame.mixer.Sound("drum_kit/Clap.wav")
-kick = pygame.mixer.Sound("drum_kit/Kick Short.wav")
-rim = pygame.mixer.Sound("drum_kit/Rimshot.wav")
-snare = pygame.mixer.Sound("drum_kit/Snare Bright.wav")
-hihat = pygame.mixer.Sound("drum_kit/Hihat.wav")
+
+# kick = pygame.mixer.Sound("drum_kit/Kick Short.wav")
+kick = sample("drum_kit/Kick Short.wav")
+clap = sample("drum_kit/Clap.wav")
+rim = sample("drum_kit/Rimshot.wav")
+snare = sample("drum_kit/Snare Bright.wav")
+hihat = sample("drum_kit/Hihat.wav")
 
 channel1 = pygame.mixer.Channel(0)
 channel2 = pygame.mixer.Channel(1)
@@ -29,12 +33,9 @@ channel5 = pygame.mixer.Channel(4)
 
 
 def play_clap():
-    # clap.set_volume(0.5)
-    # clap.play(fade_ms=100)
     channel1.play(clap)
 
 def play_kick():
-    # kick.play()
     channel2.play(kick)
 
 def play_rim():
@@ -46,42 +47,51 @@ def play_snare():
 def play_hihat():
     channel5.play(hihat)
     
-
-kick_button = customtkinter.CTkButton(root, text="KICK", height=80, width=80, command=play_kick)
-kick_button.grid(row=0, column=0)
-
-clap_button = customtkinter.CTkButton(root, text="CLAP", height=80, width=80, command=play_clap)
-clap_button.grid(row=0, column=1)
-
+# kick_hits = []
 
 def loop():
-    rim_hits = [7, 8, 16]
-    snare_hits = [5, 13] 
-    kick_hits = [1, 9]
-    hihat_hits = range(1, 16)
-    clap_hits = [11]
+    # rim_hits = [7, 8, 16]
+    # snare_hits = [5, 13] 
+    # # kick_hits = [1, 9]
+    # hihat_hits = range(1, 16)
+    # clap_hits = [11]
     count = 0
-    while True:
+    loop_count = 0
+    while loop_count < 2:
         count += 1
-        if count in kick_hits:
+        if count in kick.beat_list:
             play_kick()
-        if count in snare_hits:
+        if count in snare.beat_list:
             play_snare()
-        if count in rim_hits:
+        if count in rim.beat_list:
             play_rim()
-        if count in hihat_hits:
+        if count in hihat.beat_list:
             play_hihat()
-        if count in clap_hits:
+        if count in clap.beat_list:
             play_clap()
 
         if count == 16:
             count = 0
+            loop_count += 1
+            
 
         time.sleep(0.2)
 
 
 
-loop()
+pause = False
+
+def play():
+    loop()
+
+def pause():
+    pause = True
+    return pause
+    # pygame.mixer.pause()
 
 
-root.mainloop()
+
+# loop()
+
+
+# root.mainloop()
