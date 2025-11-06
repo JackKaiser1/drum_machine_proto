@@ -16,6 +16,7 @@ from sound_class import Sample
 # clap_button.grid(row=0, column=1)
 
 pygame.mixer.init(channels=1)
+pygame.mixer.set_num_channels(16)
 pygame.mixer.music.set_volume(0.8)
 
 # kick = pygame.mixer.Sound("drum_kit/Kick Short.wav")
@@ -41,22 +42,55 @@ channel2 = pygame.mixer.Channel(1)
 channel3 = pygame.mixer.Channel(2)
 channel4 = pygame.mixer.Channel(3)
 channel5 = pygame.mixer.Channel(4)
+channel6 = pygame.mixer.Channel(5)
+channel7 = pygame.mixer.Channel(6)
+channel8 = pygame.mixer.Channel(7)
+channel9 = pygame.mixer.Channel(8)
+channel10 = pygame.mixer.Channel(9)
+channel11 = pygame.mixer.Channel(10)
+channel12 = pygame.mixer.Channel(11)
+channel13 = pygame.mixer.Channel(12)
+channel14 = pygame.mixer.Channel(13)
+channel15 = pygame.mixer.Channel(14)
+channel16 = pygame.mixer.Channel(15)
 
-
-def play_clap():
-    channel1.play(clap)
 
 def play_kick():
     channel2.play(kick)
-
-def play_rim():
-    channel3.play(rim)
-
 def play_snare():
     channel4.play(snare)
-
+def play_clap():
+    channel1.play(clap)
 def play_hihat():
     channel5.play(hihat)
+def play_rim():
+    channel3.play(rim)
+def play_cowbell():
+    channel6.play(cowbell)
+def play_cymbal():
+    channel7.play(cymbal)
+def play_open_hat():
+    channel8.play(open_hat)
+def play_maracas():
+    channel9.play(maracas)
+def play_claves():
+    channel10.play(claves)
+def play_tom_low():
+    channel11.play(tom_low)
+def play_tom_mid():
+    channel12.play(tom_mid)
+def play_tom_hi():
+    channel13.play(tom_hi)
+def play_conga_low():
+    channel14.play(conga_low)
+def play_conga_mid():
+    channel15.play(conga_mid)
+def play_conga_hi():
+    channel16.play(conga_hi)
+
+
+
+
     
 # kick_hits = []
 
@@ -68,18 +102,41 @@ def loop():
     # clap_hits = [11]
     count = 0
     loop_count = 0
-    while loop_count < 2:
+    while loop_count < 1:
         count += 1
         if count in kick.beat_list:
             play_kick()
         if count in snare.beat_list:
             play_snare()
-        if count in rim.beat_list:
-            play_rim()
-        if count in hihat.beat_list:
-            play_hihat()
         if count in clap.beat_list:
             play_clap()
+        if count in hihat.beat_list:
+            play_hihat()
+        if count in rim.beat_list:
+            play_rim()
+        if count in cowbell.beat_list:
+            play_cowbell()
+        if count in cymbal.beat_list:
+            play_cymbal()
+        if count in open_hat.beat_list:
+            play_open_hat()
+        if count in maracas.beat_list:
+            play_maracas()
+        if count in claves.beat_list:
+            play_claves()
+        if count in tom_low.beat_list:
+            play_tom_low()
+        if count in tom_mid.beat_list:
+            play_tom_mid()
+        if count in tom_hi.beat_list:
+            play_tom_hi()
+        if count in conga_low.beat_list:
+            play_conga_low()
+        if count in conga_mid.beat_list:
+            play_conga_mid()
+        if count in conga_hi.beat_list:
+            play_conga_hi()
+
 
         if count == 16:
             count = 0
