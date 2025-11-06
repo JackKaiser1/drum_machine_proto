@@ -209,7 +209,7 @@ class DrumSelectFrame(customtkinter.CTkFrame):
 
 
         # Init Labels ------------------------------------------------------
-        self.label1 = customtkinter.CTkButton(self, text="KICK", fg_color="grey", width=55, font=("Arial", 9), text_color="white", command=lambda: self.get_drum_select(self.label1), hover=None)
+        self.label1 = customtkinter.CTkButton(self, text="KICK", fg_color="orange", width=55, font=("Arial", 9), text_color="white", command=lambda: self.get_drum_select(self.label1), hover=None)
         self.label2 = customtkinter.CTkButton(self, text="SNARE", fg_color="grey", width=55, font=("Arial", 9), text_color="white", command=lambda: self.get_drum_select(self.label2), hover=None)
         self.label3 = customtkinter.CTkButton(self, text="CLAP", fg_color="grey", width=55, font=("Arial", 9), text_color="white", command=lambda: self.get_drum_select(self.label3), hover=None)
         self.label4 = customtkinter.CTkButton(self, text="HHAT", fg_color="grey", width=55, font=("Arial", 9), text_color="white", command=lambda: self.get_drum_select(self.label4), hover=None)
