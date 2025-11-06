@@ -2,7 +2,7 @@ import pygame
 from pygame import mixer 
 import customtkinter
 import time
-from sound_class import sample
+from sound_class import Sample
 
 # root = customtkinter.CTk()
 
@@ -19,11 +19,22 @@ pygame.mixer.init(channels=1)
 pygame.mixer.music.set_volume(0.8)
 
 # kick = pygame.mixer.Sound("drum_kit/Kick Short.wav")
-kick = sample("drum_kit/Kick Short.wav")
-clap = sample("drum_kit/Clap.wav")
-rim = sample("drum_kit/Rimshot.wav")
-snare = sample("drum_kit/Snare Bright.wav")
-hihat = sample("drum_kit/Hihat.wav")
+kick = Sample("drum_kit/Kick Short.wav")
+snare = Sample("drum_kit/Snare Bright.wav")
+clap = Sample("drum_kit/Clap.wav")
+hihat = Sample("drum_kit/Hihat.wav")
+rim = Sample("drum_kit/Rimshot.wav")
+cowbell = Sample("drum_kit/Cowbell.wav")
+cymbal = Sample("drum_kit/Cymbal.wav")
+open_hat = Sample("drum_kit/Open Hat Short.wav")
+maracas = Sample("drum_kit/Maracas.wav")
+claves = Sample("drum_kit/Claves.wav")
+tom_low = Sample("drum_kit/Tom Low.wav")
+tom_mid = Sample("drum_kit/Tom Mid.wav")
+tom_hi = Sample("drum_kit/Tom High.wav")
+conga_low = Sample("drum_kit/Conga Low.wav")
+conga_mid = Sample("drum_kit/Conga Mid.wav")
+conga_hi = Sample("drum_kit/Conga High.wav")
 
 channel1 = pygame.mixer.Channel(0)
 channel2 = pygame.mixer.Channel(1)
