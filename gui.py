@@ -53,11 +53,19 @@ class GUI(customtkinter.CTk):
 
 
     def record_button():
+        # cell = CellFrame.display_beat()
+        # cell.configure(fg_color="grey")
         if GUI.pause == True:
             GUI.pause = False
+            cell = CellFrame.display_beat().configure(fg_color=gui.cell_frame.previous_color)
+            gui.cell_frame.i = -1
             return
         play()
+        CellFrame.display_beat()
         GUI.after(gui, 187, GUI.record_button)
+        # CellFrame.display_beat().configure(fg_color="grey")
+        
+
 
     def pause():
         if not GUI.pause:
@@ -92,6 +100,9 @@ class ButtonFrame(customtkinter.CTkFrame):
 class CellFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
+
+        self.i = -1
+        self.previous_color = None
 
         # Init cells -------------------------------------------------
         self.cell_1 = customtkinter.CTkButton(self, text="1", height=55, width=55, command=lambda: self.click_cell(self.cell_1, master.drum_sound.drum_obj), hover=None, fg_color="grey")
@@ -140,17 +151,23 @@ class CellFrame(customtkinter.CTkFrame):
         
     def click_cell(self, button, drum):
         beat = int(button._text)
+        beat_list = drum.beat_list 
+        active = button._fg_color == "chocolate1"
 
-        if button._fg_color == "grey" or button._fg_color == "darkgrey": 
-            drum.beat_list.append(beat)
-            button.configure(fg_color="orange")
-        elif beat in [5,6,7,8,13,14,15,16]:
-            drum.beat_list.remove(beat)
-            button.configure(fg_color="darkgrey")
-        else:
-            drum.beat_list.remove(beat)
-            button.configure(fg_color="grey")
-        print(drum.beat_list)
+        if not active:
+            if button._fg_color == "grey": 
+                beat_list.append(beat)
+                button.configure(fg_color="orange")
+            elif button._fg_color == "darkgrey":
+                beat_list.append(beat)
+                button.configure(fg_color="dark orange")
+            elif beat in [5,6,7,8,13,14,15,16] and button._fg_color == "dark orange":
+                beat_list.remove(beat)
+                button.configure(fg_color="darkgrey")
+            else:
+                beat_list.remove(beat)
+                button.configure(fg_color="grey")
+            print(beat_list)
 
 
     def drum_select(self, label):
@@ -161,13 +178,32 @@ class CellFrame(customtkinter.CTkFrame):
         for cell in gui.cell_frame.cell_list:
             cell_num = int(cell._text)
             beat_list = gui.drum_sound.drum_obj.beat_list
+
             if cell_num in beat_list:
-                cell.configure(fg_color="orange")
+                if cell._fg_color == "grey":
+                    cell.configure(fg_color="orange")
+                elif cell._fg_color == "darkgrey":
+                    cell.configure(fg_color="dark orange")
             elif cell._fg_color == "orange":
-                if cell_num in [5,6,7,8,13,14,15,16]:
-                    cell.configure(fg_color="darkgrey")
-                else:
-                    cell.configure(fg_color="grey")
+                cell.configure(fg_color="grey")
+            elif cell._fg_color == "dark orange":
+                cell.configure(fg_color="darkgrey")
+
+    def display_beat():
+        # i = gui.cell_frame.i
+        cell_list = gui.cell_frame.cell_list
+        if gui.cell_frame.previous_color is not None:
+            cell_list[gui.cell_frame.i].configure(fg_color=gui.cell_frame.previous_color)
+        gui.cell_frame.i += 1
+        if gui.cell_frame.i == 16:
+            gui.cell_frame.i = 0
+
+        gui.cell_frame.previous_color = cell_list[gui.cell_frame.i]._fg_color
+
+        cell_list[gui.cell_frame.i].configure(fg_color="chocolate1")
+        return cell_list[gui.cell_frame.i]
+
+        
 
     
 
