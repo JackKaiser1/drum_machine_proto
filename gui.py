@@ -2,10 +2,10 @@ import customtkinter
 from constants import *
 import time
 from sound_map import sample_map
-from sound import loop, play, pause, kick, snare, rim, hihat
+from sound import loop, play, pause, kick, snare, rim, hihat, count
 import pygame
 from pygame import mixer
-from sound_class import Sample, Drum
+from sound_class import Sample, Drum, Count
 # from seqencer_func import click_cell, drum_select, drum_sound
 
 
@@ -23,13 +23,14 @@ class GUI(customtkinter.CTk):
 
         self.drum_sound = Drum(kick)
         # self.select_mode = False
+        self.pause = False
+    
 
-        def record_button():
-            play()
+        
 
         # Init buttons ----------------------------------------------------
         self.bpm_button = customtkinter.CTkButton(self, text="BPM", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
-        self.rec_button = customtkinter.CTkButton(self, text="REC", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey", command=record_button)
+        self.rec_button = customtkinter.CTkButton(self, text="REC", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey", command=GUI.record_button)
         self.presets_button = customtkinter.CTkButton(self, text="Presets", height=50, width=200, fg_color="grey", hover_color="darkgrey")
 
         # Position buttons ------------------------------------------------
@@ -51,6 +52,21 @@ class GUI(customtkinter.CTk):
         self.drum_select_frame.grid(row=2, column=1, padx=0, pady=0)
 
 
+    def record_button():
+        if GUI.pause == True:
+            GUI.pause = False
+            return
+        play()
+        GUI.after(gui, 187, GUI.record_button)
+
+    def pause():
+        if not GUI.pause:
+            GUI.pause = True
+            count.count = 0
+        else:
+            GUI.pause = False
+        
+
 class ButtonFrame(customtkinter.CTkFrame):
     def __init__(self, master):
             super().__init__(master)
@@ -61,14 +77,14 @@ class ButtonFrame(customtkinter.CTkFrame):
 
 
             # Init buttons -------------------------------------------------
-            # self.select_button = customtkinter.CTkButton(self, text="SELECT", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
-            self.group_button = customtkinter.CTkButton(self, text="GROUP", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
             self.pattern_button = customtkinter.CTkButton(self, text="PATTERN", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
+            self.group_button = customtkinter.CTkButton(self, text="GROUP", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey")
+            self.pause_button = customtkinter.CTkButton(self, text="PAUSE", height=BUTTON_HEIGHT, width=BUTTON_WIDTH, fg_color="grey", hover_color="darkgrey", command=GUI.pause)
 
             # Position buttons ----------------------------------------------
-            # self.select_button.grid(row=0, column=0, padx=20, pady=10)
-            self.group_button.grid(row=0, column=0, padx=20, pady=10)
-            self.pattern_button.grid(row=1, column=0, padx=20, pady=10)
+            self.pattern_button.grid(row=0, column=0, padx=20, pady=10)
+            self.group_button.grid(row=1, column=0, padx=20, pady=10)
+            self.pause_button.grid(row=2, column=0, padx=20, pady=10)
 
 
 
@@ -76,9 +92,6 @@ class ButtonFrame(customtkinter.CTkFrame):
 class CellFrame(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
-
-        
-
 
         # Init cells -------------------------------------------------
         self.cell_1 = customtkinter.CTkButton(self, text="1", height=55, width=55, command=lambda: self.click_cell(self.cell_1, master.drum_sound.drum_obj), hover=None, fg_color="grey")

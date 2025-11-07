@@ -10,3 +10,7 @@ class Sample(pygame.mixer.Sound):
 class Drum():
     def __init__(self, drum_obj):
         self.drum_obj = drum_obj
+
+class Count():
+    def __init__(self):
+        self.count = 0
