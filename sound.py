@@ -1,7 +1,5 @@
 import pygame
 from pygame import mixer 
-import customtkinter
-import time
 from sound_class import Sample, Count
 
 
@@ -80,9 +78,6 @@ def play_conga_hi():
 count = Count()
 
 def loop():
-    # count = 0
-    # loop_count = 0
-    # while loop_count < 1:
     count.count += 1
     if count.count in kick.beat_list:
         play_kick()
@@ -120,64 +115,4 @@ def loop():
 
     if count.count == 16:
         count.count = 0
-        # loop_count += 1
-            
 
-        # time.sleep(0.2)
-
-
-
-pause = False
-
-def play():
-    loop()
-
-def pause():
-    pause = True
-    return pause
-
-# def loop():
-#     count = 0
-#     loop_count = 0
-#     while loop_count < 1:
-#         count += 1
-#         if count.count in kick.beat_list:
-#             play_kick()
-#         if count.count in snare.beat_list:
-#             play_snare()
-#         if count.count in clap.beat_list:
-#             play_clap()
-#         if count.count in hihat.beat_list:
-#             play_hihat()
-#         if count.count in rim.beat_list:
-#             play_rim()
-#         if count.count in cowbell.beat_list:
-#             play_cowbell()
-#         if count.count in cymbal.beat_list:
-#             play_cymbal()
-#         if count.count in open_hat.beat_list:
-#             play_open_hat()
-#         if count.count in maracas.beat_list:
-#             play_maracas()
-#         if count.count in claves.beat_list:
-#             play_claves()
-#         if count.count in tom_low.beat_list:
-#             play_tom_low()
-#         if count.count in tom_mid.beat_list:
-#             play_tom_mid()
-#         if count.count in tom_hi.beat_list:
-#             play_tom_hi()
-#         if count.count in conga_low.beat_list:
-#             play_conga_low()
-#         if count.count in conga_mid.beat_list:
-#             play_conga_mid()
-#         if count.count in conga_hi.beat_list:
-#             play_conga_hi()
-
-
-#         if count.count == 16:
-#             count = 0
-#             loop_count += 1
-            
-
-#         time.sleep(0.2)
